@@ -1,0 +1,243 @@
+﻿
+@{
+    ViewBag.Title = "Rate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using UpsApi.Models.ViewModel
+@model RateRequestViewModel
+
+<h2>Rate</h2>
+<br />
+
+<form id="form_rates" method="post" action="/Home/GetShop">
+    @Html.AntiForgeryToken()
+    @Html.TextBoxFor(m => m.RateRequest.Request.SubVersion, new { @Value = "1801", @class = "hidden" })
+    @Html.TextBoxFor(m => m.RateRequest.Request.TransactionReference.CustomerContext, new { @Value = "     ", @class = "hidden" })
+    @Html.TextBoxFor(m => m.RateRequest.Shipment.ShipmentRatingOptions.NegotiatedRatesIndicator, new { @Value = "TRUE", @class = "hidden" })
+    @Html.TextBoxFor(m => m.RateRequest.Shipment.TaxInformationIndicator, new { @Value = "TRUE", @class = "hidden" })
+
+    <div class="row">
+        <div class="col-md-3" id="shipfrom_content">
+            <div class="form-inline">
+                <div class="form-group">
+                    <h3>Ship from:</h3>
+                    @* <button type="button" id="clear_shipfrom_input" class="btn btn-danger">X Clear shipfrom inputs</button>*@
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.RateRequest.Shipment.ShipFrom.Name, "Name")
+                @Html.TextBoxFor(m => m.RateRequest.Shipment.ShipFrom.Name, new { @class = "form-control", @Value = "i3 International Inc." })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.RateRequest.Shipment.ShipFrom.Address.AddressLine, "Address line:")
+                @Html.TextBoxFor(m => m.RateRequest.Shipment.ShipFrom.Address.AddressLine, new { @class = "form-control", @Value = "780 Birchmount Rd, Unit 16" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.RateRequest.Shipment.ShipFrom.Address.City, "City:")
+                @Html.TextBoxFor(m => m.RateRequest.Shipment.ShipFrom.Address.City, new { @class = "form-control", @Value = "Scarborough" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.RateRequest.Shipment.ShipFrom.Address.CountryCode, "Country code:")
+                @Html.TextBoxFor(m => m.RateRequest.Shipment.ShipFrom.Address.CountryCode, new { @class = "form-control", @Value = "CA" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.RateRequest.Shipment.ShipFrom.Address.StateProvinceCode, "State/Province code:")
+                @Html.TextBoxFor(m => m.RateRequest.Shipment.ShipFrom.Address.StateProvinceCode, new { @class = "form-control", @Value = "ON" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.RateRequest.Shipment.ShipFrom.Address.PostalCode, "Postal code:")
+                @Html.TextBoxFor(m => m.RateRequest.Shipment.ShipFrom.Address.PostalCode, new { @class = "form-control", @Value = "M1K 5H4" })
+            </div>
+        </div>
+        <div class="col-md-3" id="shipto_content">
+            <div class="form-inline">
+                <div class="form-group">
+                    <h3>Ship to:</h3>
+                    <button type="button" id="clear_shipto_input" class="btn btn-danger">X Clear shipto inputs</button>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.RateRequest.Shipment.ShipTo.Name, "Name")
+                @Html.TextBoxFor(m => m.RateRequest.Shipment.ShipTo.Name, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.RateRequest.Shipment.ShipTo.Address.AddressLine, "Address line:")
+                @Html.TextBoxFor(m => m.RateRequest.Shipment.ShipTo.Address.AddressLine, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.RateRequest.Shipment.ShipTo.Address.City, "City:")
+                @Html.TextBoxFor(m => m.RateRequest.Shipment.ShipTo.Address.City, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.RateRequest.Shipment.ShipTo.Address.CountryCode, "Country code:")
+                @Html.TextBoxFor(m => m.RateRequest.Shipment.ShipTo.Address.CountryCode, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.RateRequest.Shipment.ShipTo.Address.StateProvinceCode, "State/Province code:")
+                @Html.TextBoxFor(m => m.RateRequest.Shipment.ShipTo.Address.StateProvinceCode, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.RateRequest.Shipment.ShipTo.Address.PostalCode, "Postal code:")
+                @Html.TextBoxFor(m => m.RateRequest.Shipment.ShipTo.Address.PostalCode, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-inline">
+                <div class="form-group">
+                    <h3>Service:</h3>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.RateRequest.Shipment.Service.Code, "Service code")
+                @Html.TextBoxFor(m => m.RateRequest.Shipment.Service.Code, new { @class = "form-control", @Value = "11" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.RateRequest.Shipment.Service.Description, "Service Description")
+                @Html.TextBoxFor(m => m.RateRequest.Shipment.Service.Description, new { @class = "form-control", @Value = "UPS Standard" })
+            </div>
+            <div class="form-inline">
+                <div class="form-group">
+                    <h3>Shipment total weight:</h3>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.RateRequest.Shipment.ShipmentTotalWeight.UnitOfMeasurement.Code, "Service code")
+                @Html.TextBoxFor(m => m.RateRequest.Shipment.ShipmentTotalWeight.UnitOfMeasurement.Code, new { @class = "form-control", @Value = "LBS" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.RateRequest.Shipment.ShipmentTotalWeight.UnitOfMeasurement.Description, "Service Description")
+                @Html.TextBoxFor(m => m.RateRequest.Shipment.ShipmentTotalWeight.UnitOfMeasurement.Description, new { @class = "form-control", @Value = "Pounds" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.RateRequest.Shipment.ShipmentTotalWeight.Weight, "Weight")
+                @Html.TextBoxFor(m => m.RateRequest.Shipment.ShipmentTotalWeight.Weight, new { @class = "form-control", @Value = "10" })
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-inline">
+                <div class="form-group">
+                    <h3>Package:</h3>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.RateRequest.Shipment.Package.PackagingType.Code, "Packaging code")
+                @Html.TextBoxFor(m => m.RateRequest.Shipment.Package.PackagingType.Code, new { @class = "form-control", @Value = "02" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.RateRequest.Shipment.Package.PackagingType.Description, "Packaging Description")
+                @Html.TextBoxFor(m => m.RateRequest.Shipment.Package.PackagingType.Description, new { @class = "form-control", @Value = "Package" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.RateRequest.Shipment.Package.Dimensions.UnitOfMeasurement.Code, "Dimension code")
+                @Html.TextBoxFor(m => m.RateRequest.Shipment.Package.Dimensions.UnitOfMeasurement.Code, new { @class = "form-control", @Value = "IN" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.RateRequest.Shipment.Package.Dimensions.Length, "Dimension length")
+                @Html.TextBoxFor(m => m.RateRequest.Shipment.Package.Dimensions.Length, new { @class = "form-control", @Value = "10" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.RateRequest.Shipment.Package.Dimensions.Width, "Dimension width")
+                @Html.TextBoxFor(m => m.RateRequest.Shipment.Package.Dimensions.Width, new { @class = "form-control", @Value = "7" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.RateRequest.Shipment.Package.Dimensions.Height, "Dimension height")
+                @Html.TextBoxFor(m => m.RateRequest.Shipment.Package.Dimensions.Height, new { @class = "form-control", @Value = "5" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.RateRequest.Shipment.Package.PackageWeight.UnitOfMeasurement.Code, "Package weight code")
+                @Html.TextBoxFor(m => m.RateRequest.Shipment.Package.PackageWeight.UnitOfMeasurement.Code, new { @class = "form-control", @Value = "LBS" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.RateRequest.Shipment.Package.PackageWeight.Weight, "Package weight")
+                @Html.TextBoxFor(m => m.RateRequest.Shipment.Package.PackageWeight.Weight, new { @class = "form-control", @Value = "7" })
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" id="get_rate" class="btn btn-primary d-block">Get List Rates</button>
+
+    <div class="row" id="rates_content">
+    </div>
+
+</form>
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            //$('#get_rate').click(function () {
+            //    $('#form_rates').
+            //        alert('submit');
+            //});
+
+            $('#clear_shipfrom_input').click(function () {
+                $('#shipfrom_content').find('input:text').val('');
+            });
+
+            $('#clear_shipto_input').click(function () {
+                $('#shipto_content').find('input:text').val('');
+            });
+
+            $('#form_rates').submit(function (e) {
+                e.preventDefault();
+
+                $('#rates_content').html();
+
+                if ($(this).valid()) {
+                    $.ajax({
+                        url: this.action,
+                        type: 'post',
+                        data: new FormData(this),
+                        processData: false,
+                        contentType: false,
+                        success: function (result) {
+                            if (result.success && result.resData) {
+
+                                $tr = "";
+
+                                result.resData.RatedShipment.filter(function (item) {
+                                    $tr += `<tr>
+                                                                                                <td>${item.Service.Code}</td>
+                                                                                                <td>${item.Service.Description}</td>
+                                                                                                <td>${item.TotalCharges.MonetaryValue}</td>
+                                                                                                <td>${item.NegotiatedRateCharges.TotalCharge.MonetaryValue}</td>
+                                                                                                <td>${item.NegotiatedRateCharges.TaxCharges != null ? item.NegotiatedRateCharges.TaxCharges.MonetaryValue : 0}</td>
+                                                                                                <td>${item.NegotiatedRateCharges.TotalChargesWithTaxes != null ? item.NegotiatedRateCharges.TotalChargesWithTaxes.MonetaryValue : 0}</td>
+                                                                                            </tr>`;
+                                })
+
+                                $html = `<h3>List rates</h3>
+                                                        <table class="table table-bordered">
+                                                            <thead>
+                                                                <tr>
+                                                                <th>Service code</th>
+                                                                <th>Service Description</th>
+                                                                <th>Published rates</th>
+                                                                <th>Negotiated rates</th>
+                                                                <th>Taxes</th>
+                                                                <th>Negotiated rates with taxes</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                ${$tr}
+                                                            </tbody>
+                                                            </table>`;
+
+                                $('#rates_content').html($html);
+                                console.log("data: ", result.resData);
+                            } else {
+                                alert(result.errorMessage);
+                            }
+                        },
+                    });
+                }
+            });
+        });
+
+    </script>
+
+}
