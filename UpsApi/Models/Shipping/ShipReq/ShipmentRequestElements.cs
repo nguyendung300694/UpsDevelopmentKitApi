@@ -132,7 +132,7 @@ namespace UpsApi.Models.Ups.Shipping.ShipReq
             public Packaging Packaging { get; set; }
             public Dimensions Dimensions { get; set; }
             public PackageWeight PackageWeight { get; set; }
-            public string PackageServiceOptions { get; set; }
+            //public string PackageServiceOptions { get; set; }
         }
 
         public class ShipmentRatingOptions

@@ -122,22 +122,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppSettings.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Connected Services\UpsRateService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Errors\ErrorsResponse.cs" />
     <Compile Include="Models\RateReq\RateRequest.cs" />
     <Compile Include="Models\RateRes\BaseResponse.cs" />
     <Compile Include="Models\RateRes\RateResponse.cs" />
-    <Compile Include="Models\RateRes\ShopResponse.cs" />
     <Compile Include="Models\Shipping\ShipReq\ShipmentRequest.cs" />
     <Compile Include="Models\Shipping\ShipReq\ShipmentRequestElements.cs" />
     <Compile Include="Models\Shipping\ShipReq\ShipmentRequestRootObject.cs" />
@@ -146,16 +142,15 @@
     <Compile Include="Models\Shipping\ShipRes\ShipmentResponseRootObject.cs" />
     <Compile Include="Models\ViewModel\RateRequestViewModel.cs" />
     <Compile Include="Models\ViewModel\RateResponseViewModel.cs" />
-    <Compile Include="Models\ViewModel\ShopResponseViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Ups\Api\IUpsApiService.cs" />
+    <Compile Include="Services\Ups\Api\UpsApiService.cs" />
+    <Compile Include="Services\Ups\Shipping\IShippingService.cs" />
+    <Compile Include="Services\Ups\Rating\IRatingService.cs" />
+    <Compile Include="Services\Ups\Rating\RatingService.cs" />
+    <Compile Include="Services\Ups\Shipping\ShippingService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\UpsRateService\configuration91.svcinfo" />
-    <None Include="Connected Services\UpsRateService\configuration.svcinfo" />
-    <None Include="Connected Services\UpsRateService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -166,25 +161,6 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <None Include="Connected Services\UpsRateService\common.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\UpsRateService\Error1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\UpsRateService\RateWebServiceSchema.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\UpsRateService\RateWS.wsdl" />
-    <Content Include="Connected Services\UpsRateService\UpsApi.UpsRateService.RateResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\UpsRateService\UpsApi.UpsRateService.RateResponse1.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <None Include="Connected Services\UpsRateService\UPSSecurity.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -231,9 +207,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\UpsRateService\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

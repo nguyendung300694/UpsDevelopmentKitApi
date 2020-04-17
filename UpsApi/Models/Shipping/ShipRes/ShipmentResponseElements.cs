@@ -44,7 +44,7 @@ namespace UpsApi.Models.Ups.Shipping.ShipRes
             public string MonetaryValue { get; set; }
         }
 
-        public class ItemizedCharge
+        public class ItemizedCharges
         {
             public string Code { get; set; }
             public string CurrencyCode { get; set; }
@@ -67,7 +67,7 @@ namespace UpsApi.Models.Ups.Shipping.ShipRes
         {
             public BaseServiceCharge BaseServiceCharge { get; set; }
             public TransportationCharges TransportationCharges { get; set; }
-            public List<ItemizedCharge> ListItemizedCharges { get; set; }
+            public List<ItemizedCharges> ListItemizedCharges { get; set; }
             public ServiceOptionsCharges ServiceOptionsCharges { get; set; }
             public TotalCharges TotalCharges { get; set; }
         }

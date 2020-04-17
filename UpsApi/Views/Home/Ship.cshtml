@@ -90,7 +90,7 @@
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.ShipmentRequest.Shipment.ShipTo.Phone.Number, "Phone")
-                @Html.TextBoxFor(m => m.ShipmentRequest.Shipment.ShipTo.Phone.Number, new { @class = "form-control", @Value = "1234567890"  })
+                @Html.TextBoxFor(m => m.ShipmentRequest.Shipment.ShipTo.Phone.Number, new { @class = "form-control", @Value = "1234567890" })
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.ShipmentRequest.Shipment.ShipTo.FaxNumber, "Fax")
@@ -146,6 +146,10 @@
                 <div class="form-group">
                     <h3>Package:</h3>
                 </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ShipmentRequest.Shipment.Package[0].Description, "Package Description")
+                @Html.TextBoxFor(m => m.ShipmentRequest.Shipment.Package[0].Description, new { @class = "form-control", @Value = "Goods" })
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.ShipmentRequest.Shipment.Package[0].Packaging, "Packaging code")
@@ -246,7 +250,7 @@
                                 //                                                        </table>`;
 
                                 //$('#shipping_content').html($html);
-                                //console.log("data: ", result.resData);
+                                console.log("data: ", result.resData);
                             } else {
                                 alert(result.errorMessage);
                             }

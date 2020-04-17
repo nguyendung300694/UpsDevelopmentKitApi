@@ -9,6 +9,6 @@ namespace UpsApi.Models.RateRes
     public class RateResponse
     {
         public Response Response { get; set; }
-        public RatedShipment RatedShipment { get; set; }
+        public List<RatedShipment> RatedShipment { get; set; }
     }
 }
