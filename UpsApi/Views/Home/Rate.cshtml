@@ -7,13 +7,14 @@
 @using UpsApi.Models.ViewModel
 @model RateRequestViewModel
 
-<h2>Rate</h2>
+<h2>Rating</h2>
 <br />
 
 <form id="form_rates" method="post" action="/Home/GetShop">
     @Html.AntiForgeryToken()
     @Html.TextBoxFor(m => m.RateRequest.Request.SubVersion, new { @Value = "1801", @class = "hidden" })
     @Html.TextBoxFor(m => m.RateRequest.Request.TransactionReference.CustomerContext, new { @Value = "     ", @class = "hidden" })
+    @Html.TextBoxFor(m => m.RateRequest.CustomerClassification.Code, new { @Value = "00", @class = "hidden" })
     @Html.TextBoxFor(m => m.RateRequest.Shipment.ShipmentRatingOptions.NegotiatedRatesIndicator, new { @Value = "TRUE", @class = "hidden" })
     @Html.TextBoxFor(m => m.RateRequest.Shipment.TaxInformationIndicator, new { @Value = "TRUE", @class = "hidden" })
 
@@ -121,36 +122,36 @@
                 </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(m => m.RateRequest.Shipment.Package.PackagingType.Code, "Packaging code")
-                @Html.TextBoxFor(m => m.RateRequest.Shipment.Package.PackagingType.Code, new { @class = "form-control", @Value = "02" })
+                @Html.LabelFor(m => m.RateRequest.Shipment.Package[0].PackagingType.Code, "Packaging code")
+                @Html.TextBoxFor(m => m.RateRequest.Shipment.Package[0].PackagingType.Code, new { @class = "form-control", @Value = "02" })
             </div>
             <div class="form-group">
-                @Html.LabelFor(m => m.RateRequest.Shipment.Package.PackagingType.Description, "Packaging Description")
-                @Html.TextBoxFor(m => m.RateRequest.Shipment.Package.PackagingType.Description, new { @class = "form-control", @Value = "Package" })
+                @Html.LabelFor(m => m.RateRequest.Shipment.Package[0].PackagingType.Description, "Packaging Description")
+                @Html.TextBoxFor(m => m.RateRequest.Shipment.Package[0].PackagingType.Description, new { @class = "form-control", @Value = "Package" })
             </div>
             <div class="form-group">
-                @Html.LabelFor(m => m.RateRequest.Shipment.Package.Dimensions.UnitOfMeasurement.Code, "Dimension code")
-                @Html.TextBoxFor(m => m.RateRequest.Shipment.Package.Dimensions.UnitOfMeasurement.Code, new { @class = "form-control", @Value = "IN" })
+                @Html.LabelFor(m => m.RateRequest.Shipment.Package[0].Dimensions.UnitOfMeasurement.Code, "Dimension code")
+                @Html.TextBoxFor(m => m.RateRequest.Shipment.Package[0].Dimensions.UnitOfMeasurement.Code, new { @class = "form-control", @Value = "IN" })
             </div>
             <div class="form-group">
-                @Html.LabelFor(m => m.RateRequest.Shipment.Package.Dimensions.Length, "Dimension length")
-                @Html.TextBoxFor(m => m.RateRequest.Shipment.Package.Dimensions.Length, new { @class = "form-control", @Value = "10" })
+                @Html.LabelFor(m => m.RateRequest.Shipment.Package[0].Dimensions.Length, "Dimension length")
+                @Html.TextBoxFor(m => m.RateRequest.Shipment.Package[0].Dimensions.Length, new { @class = "form-control", @Value = "10" })
             </div>
             <div class="form-group">
-                @Html.LabelFor(m => m.RateRequest.Shipment.Package.Dimensions.Width, "Dimension width")
-                @Html.TextBoxFor(m => m.RateRequest.Shipment.Package.Dimensions.Width, new { @class = "form-control", @Value = "7" })
+                @Html.LabelFor(m => m.RateRequest.Shipment.Package[0].Dimensions.Width, "Dimension width")
+                @Html.TextBoxFor(m => m.RateRequest.Shipment.Package[0].Dimensions.Width, new { @class = "form-control", @Value = "7" })
             </div>
             <div class="form-group">
-                @Html.LabelFor(m => m.RateRequest.Shipment.Package.Dimensions.Height, "Dimension height")
-                @Html.TextBoxFor(m => m.RateRequest.Shipment.Package.Dimensions.Height, new { @class = "form-control", @Value = "5" })
+                @Html.LabelFor(m => m.RateRequest.Shipment.Package[0].Dimensions.Height, "Dimension height")
+                @Html.TextBoxFor(m => m.RateRequest.Shipment.Package[0].Dimensions.Height, new { @class = "form-control", @Value = "5" })
             </div>
             <div class="form-group">
-                @Html.LabelFor(m => m.RateRequest.Shipment.Package.PackageWeight.UnitOfMeasurement.Code, "Package weight code")
-                @Html.TextBoxFor(m => m.RateRequest.Shipment.Package.PackageWeight.UnitOfMeasurement.Code, new { @class = "form-control", @Value = "LBS" })
+                @Html.LabelFor(m => m.RateRequest.Shipment.Package[0].PackageWeight.UnitOfMeasurement.Code, "Package weight code")
+                @Html.TextBoxFor(m => m.RateRequest.Shipment.Package[0].PackageWeight.UnitOfMeasurement.Code, new { @class = "form-control", @Value = "LBS" })
             </div>
             <div class="form-group">
-                @Html.LabelFor(m => m.RateRequest.Shipment.Package.PackageWeight.Weight, "Package weight")
-                @Html.TextBoxFor(m => m.RateRequest.Shipment.Package.PackageWeight.Weight, new { @class = "form-control", @Value = "7" })
+                @Html.LabelFor(m => m.RateRequest.Shipment.Package[0].PackageWeight.Weight, "Package weight")
+                @Html.TextBoxFor(m => m.RateRequest.Shipment.Package[0].PackageWeight.Weight, new { @class = "form-control", @Value = "7" })
             </div>
         </div>
     </div>

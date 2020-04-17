@@ -10,6 +10,8 @@ using System.Web;
 using System.Web.Mvc;
 using UpsApi.Models.RateReq;
 using UpsApi.Models.RateRes;
+using UpsApi.Models.Ups.Shipping.ShipReq;
+using UpsApi.Models.Ups.Shipping.ShipRes;
 using UpsApi.Models.ViewModel;
 using static UpsApi.Models.RateRes.BaseResponse;
 
@@ -17,8 +19,15 @@ namespace UpsApi.Controllers
 {
     public class HomeController : Controller
     {
+        //Rating
         private const string _rateRequestUri = "https://onlinetools.ups.com/ship/v1/rating/Rate";
         private const string _shopRequestUri = "https://onlinetools.ups.com/ship/v1/rating/Shop";
+        //End Rating
+
+        //Shipping
+        private const string _shipRequestUriCIE = "https://wwwcie.ups.com/ship/v1807/shipments?additionaladdressvalidation=city";
+        private const string _shopRequestUriPoduction = "";
+        //End Shipping
 
         public ActionResult Rate()
         {
@@ -477,13 +486,46 @@ namespace UpsApi.Controllers
             listShipmentService.Add(new ShipmentService { ServiceCode = "93", ServiceDescription = "UPS Sure Post" });
         }
 
-
         [HttpPost]
-        public JsonResult ProcessShipment()
+        public JsonResult ProcessShipment(ShipmentRequestRootObject model, string requestUrl = _shipRequestUriCIE)
         {
             try
             {
-                return Json(new { success = true });
+                var accountNbr = "132R1V";
+                ShipmentRequestElements.Shipper shipper = new ShipmentRequestElements.Shipper
+                {
+                    Name = model.ShipmentRequest.Shipment.ShipFrom.Name,
+                    ShipperNumber = accountNbr,
+                    AttentionName = model.ShipmentRequest.Shipment.ShipFrom.AttentionName,
+                    Phone = new ShipmentRequestElements.Phone
+                    {
+                        Number = model.ShipmentRequest.Shipment.ShipFrom.Phone.Number
+                    },
+                    FaxNumber = model.ShipmentRequest.Shipment.ShipFrom.FaxNumber,
+                    Address = new ShipmentRequestElements.ShipperAddress
+                    {
+                        AddressLine = model.ShipmentRequest.Shipment.ShipFrom.Address.AddressLine,
+                        City = model.ShipmentRequest.Shipment.ShipFrom.Address.City,
+                        CountryCode = model.ShipmentRequest.Shipment.ShipFrom.Address.CountryCode,
+                        StateProvinceCode = model.ShipmentRequest.Shipment.ShipFrom.Address.StateProvinceCode,
+                        PostalCode = model.ShipmentRequest.Shipment.ShipFrom.Address.PostalCode
+                    }
+                };
+
+                model.ShipmentRequest.Shipment.Shipper = shipper;
+                model.ShipmentRequest.Shipment.PaymentInformation = new ShipmentRequestElements.PaymentInformation
+                {
+                    ShipmentCharge = new ShipmentRequestElements.ShipmentCharge
+                    {
+                        Type = "01", //Shipment
+                        BillShipper = new ShipmentRequestElements.BillShipper
+                        {
+                            AccountNumber = accountNbr
+                        }
+                    }
+                };
+
+                return Json(new { success = true, resData = new ShipmentResponse() });
             }
             catch (Exception ex)
             {

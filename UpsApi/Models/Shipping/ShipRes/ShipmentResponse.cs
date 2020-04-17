@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using static ShippingServiceRestApi.Models.Ups.Shipping.ShipRes.ShipmentResponseElements;
+using static UpsApi.Models.Ups.Shipping.ShipRes.ShipmentResponseElements;
 
-namespace ShippingServiceRestApi.Models.Ups.Shipping.ShipRes
+namespace UpsApi.Models.Ups.Shipping.ShipRes
 {
     public class ShipmentResponse
     {

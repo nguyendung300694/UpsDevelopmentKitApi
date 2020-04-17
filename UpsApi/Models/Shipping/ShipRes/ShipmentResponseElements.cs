@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ShippingServiceRestApi.Models.Ups.Shipping.ShipRes
+namespace UpsApi.Models.Ups.Shipping.ShipRes
 {
     public class ShipmentResponseElements
     {

@@ -20,6 +20,11 @@ namespace UpsApi.Models.RateReq
         public TransactionReference TransactionReference { get; set; }
     }
 
+    public class CustomerClassification
+    {
+        public string Code { get; set; }
+    }
+
     public class ShipmentRatingOptions
     {
         //public string UserLevelDiscountIndicator { get; set; }
@@ -160,12 +165,13 @@ namespace UpsApi.Models.RateReq
         public ShipFrom ShipFrom { get; set; }
         public Service Service { get; set; }
         public ShipmentTotalWeight ShipmentTotalWeight { get; set; }
-        public Package Package { get; set; }
+        public List<Package> Package { get; set; }
     }
 
     public class RateRequest
     {
         public Request Request { get; set; }
+        public CustomerClassification CustomerClassification { get; set; }
         public Shipment Shipment { get; set; }
     }
 

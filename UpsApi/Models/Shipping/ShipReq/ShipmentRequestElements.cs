@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace ShippingServiceRestApi.Models.Ups.Shipping.ShipReq
+namespace UpsApi.Models.Ups.Shipping.ShipReq
 {
     public class ShipmentRequestElements
     {
@@ -14,6 +15,20 @@ namespace ShippingServiceRestApi.Models.Ups.Shipping.ShipReq
 
         public class Address
         {
+            [Required]
+            public string AddressLine { get; set; }
+            [Required]
+            public string City { get; set; }
+            [Required]
+            public string CountryCode { get; set; }
+            [Required]
+            public string StateProvinceCode { get; set; }
+            [Required]
+            public string PostalCode { get; set; }
+        }
+
+        public class ShipperAddress
+        {
             public string AddressLine { get; set; }
             public string City { get; set; }
             public string CountryCode { get; set; }
@@ -23,58 +38,36 @@ namespace ShippingServiceRestApi.Models.Ups.Shipping.ShipReq
 
         public class Shipper
         {
+            [Required]
             public string Name { get; set; }
+            [Required]
             public string AttentionName { get; set; }
             public Phone Phone { get; set; }
             public string FaxNumber { get; set; }
             public string ShipperNumber { get; set; }
-            public Address Address { get; set; }
-        }
-
-        public class Phone2
-        {
-            public string Number { get; set; }
-        }
-
-        public class Address2
-        {
-            public string AddressLine { get; set; }
-            public string City { get; set; }
-            public string CountryCode { get; set; }
-            public string StateProvinceCode { get; set; }
-            public string PostalCode { get; set; }
+            public ShipperAddress Address { get; set; }
         }
 
         public class ShipTo
         {
+            [Required]
             public string Name { get; set; }
+            [Required]
             public string AttentionName { get; set; }
-            public Phone2 Phone { get; set; }
+            public Phone Phone { get; set; }
             public string FaxNumber { get; set; }
-            public Address2 Address { get; set; }
-        }
-
-        public class Phone3
-        {
-            public string Number { get; set; }
-        }
-
-        public class Address3
-        {
-            public string AddressLine { get; set; }
-            public string City { get; set; }
-            public string CountryCode { get; set; }
-            public string StateProvinceCode { get; set; }
-            public string PostalCode { get; set; }
+            public Address Address { get; set; }
         }
 
         public class ShipFrom
         {
+            [Required]
             public string Name { get; set; }
+            [Required]
             public string AttentionName { get; set; }
-            public Phone3 Phone { get; set; }
+            public Phone Phone { get; set; }
             public string FaxNumber { get; set; }
-            public Address3 Address { get; set; }
+            public Address Address { get; set; }
         }
 
         public class BillShipper
@@ -95,36 +88,41 @@ namespace ShippingServiceRestApi.Models.Ups.Shipping.ShipReq
 
         public class Service
         {
+            [Required]
             public string Code { get; set; }
+            [Required]
             public string Description { get; set; }
         }
 
         public class Packaging
         {
+            [Required]
             public string Code { get; set; }
+            [Required]
+            public string Description { get; set; }
         }
 
         public class UnitOfMeasurement
         {
+            [Required]
             public string Code { get; set; }
         }
 
         public class Dimensions
         {
             public UnitOfMeasurement UnitOfMeasurement { get; set; }
+            [Required]
             public string Length { get; set; }
+            [Required]
             public string Width { get; set; }
+            [Required]
             public string Height { get; set; }
-        }
-
-        public class UnitOfMeasurement2
-        {
-            public string Code { get; set; }
         }
 
         public class PackageWeight
         {
-            public UnitOfMeasurement2 UnitOfMeasurement { get; set; }
+            public UnitOfMeasurement UnitOfMeasurement { get; set; }
+            [Required]
             public string Weight { get; set; }
         }
 
@@ -159,6 +157,7 @@ namespace ShippingServiceRestApi.Models.Ups.Shipping.ShipReq
 
         public class LabelImageFormat
         {
+            [Required]
             public string Code { get; set; }
         }
 
